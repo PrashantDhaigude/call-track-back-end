@@ -1,5 +1,14 @@
 const CallTrack = require("./call_track_modal");
 
+
+const getNextId = async (model, idField) => {
+  const lastDoc = await model
+    .findOne()
+    .sort({ [idField]: -1 })
+    .limit(1);
+  return lastDoc ? lastDoc[idField] + 1 : 1;
+};
+
 exports.createCallTrack = async (req, res) => {
   try {
     const {
@@ -10,8 +19,9 @@ exports.createCallTrack = async (req, res) => {
       timestamp,
       status,
     } = req.body;
-
+    const call_track_id = await getNextId(CallTrack, "call_track_id");
     const newEntry = new CallTrack({
+      call_track_id,
       direction,
       mobile_number,
       contact_name,
