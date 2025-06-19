@@ -40,12 +40,15 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const user = await User.findOneAndUpdate({ user_id: req.body.user_id },req.body,{ new: true }
+    const user = await User.findOneAndUpdate(
+      { user_id: req.body.user_id },
+      req.body,
+      { new: true }
     );
     if (!user) return res.status(404).json({ error: "User not found" });
-    res.json({ message: "User updated successfully" ,status:1});
+    res.json({ message: "User updated successfully", status: 1 });
   } catch (err) {
-    res.status(500).json({ error: err.message, status:1 });
+    res.status(500).json({ error: err.message, status: 1 });
   }
 };
 
@@ -54,7 +57,7 @@ exports.deleteUser = async (req, res) => {
   try {
     const user = await User.findOneAndDelete({ user_id: req.body.user_id });
     if (!user) return res.status(404).json({ error: "User not found" });
-    res.json({ message: "User deleted successfully" ,status:1});
+    res.json({ message: "User deleted successfully", status: 1 });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

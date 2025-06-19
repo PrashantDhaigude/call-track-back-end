@@ -24,12 +24,15 @@ mongoose
 // Default route
 app.get("/", (req, res) => res.send("📞 Call Tracking API Running"));
 
-// Routes
+// RoutesS
 const callRoutes = require("./calltrack/call_track_routes");
 const userRoutes = require("./user/user_routes");
+// app.get("/", (req, res) => {
+//   res.send("Hello from Express!");
+// });
 
-app.use("/api/calltrack", callRoutes); // e.g., POST /api/calltrack/store
-app.use("/api/user", userRoutes); // e.g., POST /api/user/store
+app.use("/api", callRoutes); // e.g., POST /api/calltrack/store
+app.use("/api", userRoutes); // e.g., POST /api/user/store
 
 // Server start
 app.listen(PORT, () => {
