@@ -25,12 +25,14 @@ async function startServer() {
     // Routes
     const callRoutes = require("./calltrack/call_track_routes");
     const userRoutes = require("./user/user_routes");
+    const MessageRoutes = require("./message/message_route");
 
     app.get("/", (req, res) => {
       res.send("📞 Call Tracking API Running");
     });
 
     app.use("/api", callRoutes);
+    app.use("/api", MessageRoutes);
     app.use("/api", userRoutes);
 
     app.listen(PORT, () => {
